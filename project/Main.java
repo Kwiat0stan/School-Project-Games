@@ -1,4 +1,4 @@
-// Prosta gra do zgadywania liczby wylosowanej przez program.
+// Simple game guessing number choosed by program.
 
 package project;
 
