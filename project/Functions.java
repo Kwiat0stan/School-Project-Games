@@ -1,4 +1,4 @@
-// Klasa zawierajaca funkcje uzywane w roznych grach.
+// Class that contains functions using in games.
 
 package project;
 
@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Functions
 {
-    // Funckja losujaca integer'a.
+    // Random integer function.
     public static int randInt(int min, int max)
     {
         Random r = new Random();
@@ -15,7 +15,8 @@ public class Functions
         return res;
     }
 
-    // Funckja wczytujaca integer'a od uzytkownika.
+    // Function gettings user's integer.
+    // We can't close scan object because than we can only use it once.
     public static int scanInt()
     {
         Scanner scan = new Scanner(System.in);
