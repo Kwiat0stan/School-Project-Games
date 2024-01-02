@@ -32,8 +32,10 @@ public class Server
             // Add "view" code and "nextStep".
 
             String response = "<html>" +
-                            "<head><title> Server </title></head>" +
-                            "<body></body>" +
+                            "<head>" + 
+                                "<title>Games</title>" +
+                            "</head>" +
+                            "<body>" + "</body>" +
                             "</html>";
 
             exchange.sendResponseHeaders(200, response.length());
