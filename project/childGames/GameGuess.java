@@ -1,7 +1,5 @@
 package project.childGames;
 
-import project.Functions;
-import project.parentsGames.Game;
 import project.parentsGames.GameInterface;
 import project.parentsGames.GameNumber;
 
@@ -37,19 +35,55 @@ public class GameGuess extends GameNumber implements GameInterface
         this.PHASE = 0;
     }
 
-    // public String nextStep(String parameter)
-    // {
-    //     if(this.PHASE == 4){ restart(); }  
-    // }
+    public String nextStep(String parameter)
+    {
+        if(this.PHASE == 4){ restart(); }
+        if(this.ATTEMPS <= 0){ this.PHASE = 4; }
+        else
+        {
+            if(parameter != "")
+            {
+                int n = Integer.parseInt(parameter);
+                if(n < NUM_TO_GUESS){ this.PHASE = 1; }
+                if(n > NUM_TO_GUESS){ this.PHASE = 2; }
+                if(n == this.NUM_TO_GUESS){ this.PHASE = 3; }
+                this.ATTEMPS -= 1;
+            }
+        }
+        return this.toStringHTML();
+    }
 
-    @Override
     public String toString()
     {
         String r = "";
+        r += "ID: " + this.ID + "\n";
         r += "Name: " + this.NAME + "\n";
+        r += "Attemps: " + this.ATTEMPS + "\n";
         r += "Min: " + this.MIN + "\n";
         r += "Max: " + this.MAX + "\n";
         r += "Num to guess: " + this.NUM_TO_GUESS + "\n";
+        return r;
+    }
+
+    public String toStringHTML()
+    {
+        String r = "<div class=\"w3-panel\">";
+        r += "ID: " + this.ID + "<br>";
+        r += "Name: " + this.NAME + "<br>";
+        r += "Attemps: " + this.ATTEMPS + "<br>";
+        r += "Min: " + this.MIN + "<br>";
+        r += "Max: " + this.MAX + "<br>";
+        r += "Num to guess: " + this.NUM_TO_GUESS + "<br>";
+        r += "</div>";
+
+        r += "<div class=\"w3-panel w3-green\">";
+        if(this.PHASE == 0) r += "Zaczynamy, podaj wartosc: ";
+        if(this.PHASE == 1) r += "Szukana wartosc jest wieksza od podanej: ";
+        if(this.PHASE == 2) r += "Szukana wartosc jest mniejsza od podanej: ";
+        if(this.PHASE == 3) r += "Zwyciestwo";
+        if(this.PHASE == 4) r += "Przegrana";
+        r += "</div>";
+
         return r;
     }
 

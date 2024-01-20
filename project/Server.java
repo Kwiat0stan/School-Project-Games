@@ -1,5 +1,9 @@
 package project;
 
+import project.childGames.GameGuess;
+import project.childGames.GameOperators;
+import project.parentsGames.GameInterface;
+
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
@@ -10,68 +14,65 @@ import java.net.InetSocketAddress;
 
 public class Server
 {
-    static GameInterface gry[];
-    static String gryWidok[] = new String[1000];
+    static GameInterface games[];
+    static String gamesView[] = new String[1000];
     public static void main(String[] args) throws IOException
     {
-
-        Server.gry = new GraZgadLicz[10];
+        // How many games of specific kind.
+        // Server.games = new GameGuess[2];
+        Server.games = new GameOperators[2];
 
         //--------------------------------------------------------------------------
-        Server.gry[0] = new GraZgadLicz();
-        Server.gry[1] = new GraZgadLicz();
-        Server.gry[2] = new GraZgadLicz();
-        Server.gry[3] = new GraZgadLicz();
-        Server.gry[4] = new GraZgadLicz();
-        Server.gry[5] = new GraZgadLicz();
-        Server.gry[6] = new GraZgadLicz();
-        Server.gry[7] = new GraZgadLicz();
-        Server.gry[8] = new GraZgadLicz();
-        Server.gry[9] = new GraZgadLicz();
+        // Creating objects of this game.
+        // Server.games[0] = new GameGuess();
+        // Server.games[1] = new GameGuess(1, "Custom game", 10, 15, 50);
+
+        Server.games[0] = new GameOperators();
+        Server.games[1] = new GameOperators(1, "Custom game", 1, 0.0, 20.0);
         //----------------------------------------------------------------------------
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0); //localhost:8080/home
         server.createContext("/home", new MyHandler());
-        System.out.println(">> Server start");
+        System.out.println(">> Server started");
         server.start();
     }
 
     static class MyHandler implements HttpHandler
     {
         @Override
-        public void handle(HttpExchange exchange) throws  IOException{
-
+        public void handle(HttpExchange exchange) throws  IOException
+        {
             String query =  exchange.getRequestURI().getQuery();
             System.out.println(query);
-            String param[] = new String[2];
+            String parameter[] = new String[2];
             int id = 0;
             String val = "";
             if (query != null) {
-                param = query.substring(2).split("_");
-                id = Integer.parseInt(param[0]);
-                val = param[1];
+                parameter = query.substring(2).split("_");
+                id = Integer.parseInt(parameter[0]);
+                val = parameter[1];
             }
-            System.out.println("Param: " + val + " Id: " + id);
+            System.out.println("Parameter: " + val + " Id: " + id);
 
             int i = 0;
-            for (GameInterface g: Server.gry) {
+            for (GameInterface g: Server.games) {
                 if (id == i) {
-                    Server.gryWidok[i] = Server.gry[i].nextStep(val);
+                    Server.gamesView[i] = Server.games[i].nextStep(val);
                 } else {
-                    Server.gryWidok[i] = Server.gry[i].nextStep("");
+                    Server.gamesView[i] = Server.games[i].nextStep("");
                 }
                 i++;
             }
 
             String response = "<html>" +
                     "<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">" +
-                    "<div class=\"w3-panel w3-red\"><h1>Strona z gramia</h1></div>" +
+                    "<div class=\"w3-panel w3-red\"><h1>Strona z grami</h1></div>" +
                     "<div class=\"w3-container\" style=\"display: flex; flex-flow: row wrap; justify-content: center;\">";
 
                     i = 0;
-                    for(GameInterface g: Server.gry) {
+                    for(GameInterface g: Server.games) {
                                 response+= "<div class=\"w3-card-4 w3-margin\" style=\"width:300px;\">" +
-                                "<div class=\"w3-panel w3-green w3-padding-16\">" + Server.gryWidok[i] + "</div>" +
+                                "<div class=\"w3-panel w3-green w3-padding-16\">" + Server.gamesView[i] + "</div>" +
                                 "<div class=\"w3-panel w3-blue w3-padding\"><input type=\"number\" id=\"id_" + i + "\"></div>" +
                                 "<div class=\"w3-panel w3-blue w3-padding\"><button class=\"w3-button w3-orange w3-round\"  onclick=\"dalej("+ i +")\">Dalej</button></div>" +
                                 "</div>";
