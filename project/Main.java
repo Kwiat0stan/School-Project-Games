@@ -2,12 +2,14 @@
 
 package project;
 
-public class Main
+import project.parentsGames.GameNumber;
+
+public class Main extends GameNumber
 {
     public static void main(String[] args)
     {
         int attemps = 5;
-        int num = Functions.randInt(0, 9);
+        int num = randInt(0, 9);
         boolean guessed = false;
         
         System.out.println("Guess number");

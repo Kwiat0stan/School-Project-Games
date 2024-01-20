@@ -9,10 +9,22 @@ public abstract class GameNumber extends Game
     public GameNumber(int id, String name){ super(id, name); }
 
     // Random integer method.
-    public int randInt(int min, int max)
+    public static int randInt(int min, int max)
     {
         Random r = new Random();
         int res = r.nextInt(min, max + 1);
         return res;
+    }
+
+    public static double randDouble(double min, double max)
+    {
+        Random r = new Random();
+        double res = r.nextDouble(min, max + 1);
+        return res;
+    }
+
+    public double double2(double number)
+    {
+        return Double.parseDouble(String.format("%.1f", number));
     }
 }
