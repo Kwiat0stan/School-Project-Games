@@ -3,11 +3,13 @@
 package project;
 
 import project.parentsGames.GameNumber;
+import java.util.Scanner;
 
 public class Main extends GameNumber
 {
     public static void main(String[] args)
     {
+        Scanner scanner = new Scanner(System.in);
         int attemps = 5;
         int num = randInt(0, 9);
         boolean guessed = false;
@@ -17,7 +19,7 @@ public class Main extends GameNumber
         {
             System.out.println("You have: " + (attemps - i) + " attemps left");
             System.out.print("Enter your number: ");
-            int guessNum = Functions.scanInt();
+            int guessNum = scanner.nextInt();
             if(guessNum == num) guessed = true;
             if(guessed == true)
             {
@@ -31,5 +33,6 @@ public class Main extends GameNumber
             System.out.println("The number was " + num);            
             }
         }
+        scanner.close();
     }
 }
