@@ -8,4 +8,5 @@ public interface GameInterface
     // changed / to reverse - add override about this method in classes/
     public String toString();
     public void printGame();
+    public void restart();
 }

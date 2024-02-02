@@ -2,6 +2,7 @@ package project;
 
 import project.childGames.GameGuess;
 import project.childGames.GameOperators;
+import project.childGames.GameWord;
 import project.parentsGames.GameInterface;
 
 import com.sun.net.httpserver.HttpServer;
@@ -20,15 +21,19 @@ public class Server
     {
         // How many games of specific kind.
         // Server.games = new GameGuess[2];
-        Server.games = new GameOperators[2];
+        // Server.games = new GameOperators[2];
+        Server.games = new GameWord[2];
 
         //--------------------------------------------------------------------------
         // Creating objects of this game.
         // Server.games[0] = new GameGuess();
         // Server.games[1] = new GameGuess(1, "Custom game", 10, 15, 50);
 
-        Server.games[0] = new GameOperators();
-        Server.games[1] = new GameOperators(1, "Custom game", 1, 0.0, 20.0);
+        // Server.games[0] = new GameOperators();
+        // Server.games[1] = new GameOperators(1, "Custom game", 1, 0.0, 20.0);
+
+        Server.games[0] = new GameWord();
+        Server.games[1] = new GameWord(5, "Custom game", 1, 3);
         //----------------------------------------------------------------------------
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0); //localhost:8080/home
@@ -73,10 +78,11 @@ public class Server
                     for(GameInterface g: Server.games) {
                                 response+= "<div class=\"w3-card-4 w3-margin\" style=\"width:300px;\">" +
                                 "<div class=\"w3-panel w3-green w3-padding-16\">" + Server.gamesView[i] + "</div>" +
-                                "<div class=\"w3-panel w3-blue w3-padding\"><input type=\"number\" id=\"id_" + i + "\"></div>" +
+                                "<div class=\"w3-panel w3-blue w3-padding\"><input type=\"text\" id=\"id_" + i + "\"></div>" +
                                 "<div class=\"w3-panel w3-blue w3-padding\"><button class=\"w3-button w3-orange w3-round\"  onclick=\"dalej("+ i +")\">Dalej</button></div>" +
                                 "</div>";
                                 i++;
+                                // changed type z number na text
                     }
 
                     response += "</div>" +

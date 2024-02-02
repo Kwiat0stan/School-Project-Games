@@ -28,7 +28,7 @@ public class GameGuess extends GameNumber implements GameInterface
         this.NUM_TO_GUESS = randInt(this.MIN, this.MAX);
     }
 
-    private void restart()
+    public void restart()
     {
         this.ATTEMPS = 5;
         this.NUM_TO_GUESS = randInt(0, 10);
@@ -37,7 +37,7 @@ public class GameGuess extends GameNumber implements GameInterface
 
     public String nextStep(String parameter)
     {
-        if(this.PHASE == 4){ restart(); }
+        if(this.PHASE == 3 || this.PHASE == 4){ restart(); }
         if(this.ATTEMPS <= 0){ this.PHASE = 4; }
         else
         {
@@ -87,10 +87,6 @@ public class GameGuess extends GameNumber implements GameInterface
         return r;
     }
 
-    public void printGame()
-    {
-        System.out.println("===========================================");
-        System.out.print(this.toString());
-        System.out.println("===========================================\n");
-    }
+    @Override
+    public void printGame(){ super.printGame(); }
 }
