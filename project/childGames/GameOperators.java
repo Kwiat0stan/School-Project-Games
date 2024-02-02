@@ -72,7 +72,7 @@ public class GameOperators extends GameNumber implements GameInterface
         }
     }
 
-    private void restart()
+    public void restart()
     {
         this.ATTEMPS = 3;
         this.NUM1 = randDouble(this.MIN, this.MAX);
@@ -101,7 +101,7 @@ public class GameOperators extends GameNumber implements GameInterface
 
     public String nextStep(String parameter)
     {
-        if(this.PHASE == 4){ restart(); }
+        if(this.PHASE == 3 || this.PHASE == 4){ restart(); }
         if(this.ATTEMPS <= 0){ this.PHASE = 4; }
         else
         {
@@ -127,7 +127,7 @@ public class GameOperators extends GameNumber implements GameInterface
         r += "Num1: " + this.NUM1 + "\n";
         r += "Num2: "+ this.NUM2 + "\n";
         r += "Operator: " + this.OPERATOR + "\n";
-        r += "Num to calculate: " + this.NUM_TO_GUESS + "<br>";
+        r += "Num to calculate: " + this.NUM_TO_GUESS + "\n";
 
         return r;
     }
@@ -156,10 +156,6 @@ public class GameOperators extends GameNumber implements GameInterface
         return r;
     }
 
-    public void printGame()
-    {
-        System.out.println("===========================================");
-        System.out.print(this.toString());
-        System.out.println("===========================================\n");
-    }
+    @Override
+    public void printGame(){ super.printGame(); }
 }

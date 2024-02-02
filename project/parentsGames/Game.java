@@ -18,4 +18,11 @@ public abstract class Game
         this.ID = id;
         this.NAME = name;
     }
+
+    public void printGame()
+    {
+        System.out.println("===========================================");
+        System.out.print(this.toString());
+        System.out.println("===========================================\n");
+    }
 }

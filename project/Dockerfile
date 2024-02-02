@@ -1,14 +1,26 @@
+# Pull base image
 # Use an official OpenJDK image with the full JDK
-FROM openjdk:11
+FROM openjdk:21-jdk
 
-# Set path to dir where is file that you want to test / execute
-WORKDIR /Users/wojciechk/Developer/School-Project-Games/project
+# Create new dir called app inside container for my application files
+# RUN executes commands for image 
+RUN mkdir /app
 
-# Path where you build image
-COPY /Users/wojciechk/Developer/School-Project-Games/project .
+# Copy application files into image filesystem
+COPY . /app
 
-# Compile the Java code
-RUN javac **/*.java
+# Set the dir for executing future commands RUN
+WORKDIR /app
 
-# Run the Java application
-CMD ["java", "Main"]
+RUN javac -d . Main.java Server.java childGames/*.java parentsGames/*.java test/*.java
+
+# Command that will start the container from the image
+# It can be only one command or ENTRYPOINT instuction
+# F.e this one launch application where you start the container
+# second var -> specify package with File class at the end
+
+# Select one depends what image you want to create
+
+# CMD [ "java", "project.test.Test" ]
+# CMD [ "java", "project.Main" ]
+CMD [ "java", "project.Server" ]

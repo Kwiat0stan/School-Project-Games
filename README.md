@@ -6,7 +6,7 @@ Java project for school with several games on an HTTP server.
 
 ## Game Word
 ### How it works:
-1. Program choose one item from enum specified in GameString class
+1. Program choose one item from array of cars  s
 2. Print its name with empty characters:
 
     ```
@@ -18,9 +18,3 @@ Java project for school with several games on an HTTP server.
 3. User inputs one character:
    1. If it fits into \---,  then reveal it
    2. If it not, then take one user's life
-
-## Day 29.01.24
-
-#### Done:
-- Removed Functions.java
-- Create instances of Scanner class
