@@ -27,13 +27,13 @@ public class Server
         //--------------------------------------------------------------------------
         // Creating objects of this game.
         // Server.games[0] = new GameGuess();
-        // Server.games[1] = new GameGuess(1, "Custom game", 10, 15, 50);
+        // Server.games[1] = new GameGuess(1, "Custom game - Guess", 10, 15, 50);
 
         // Server.games[0] = new GameOperators();
-        // Server.games[1] = new GameOperators(1, "Custom game", 1, 0.0, 20.0);
+        // Server.games[1] = new GameOperators(1, "Custom game - Operators", 1, 0.0, 20.0);
 
         Server.games[0] = new GameWord();
-        Server.games[1] = new GameWord(5, "Custom game", 1, 3);
+        Server.games[1] = new GameWord(5, "Custom game - Word", 1, 3);
         //----------------------------------------------------------------------------
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0); //localhost:8080/home
