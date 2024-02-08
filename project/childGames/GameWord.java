@@ -38,13 +38,6 @@ public class GameWord extends GameString implements GameInterface
     
     public void hideCar()
     {
-        // int l = this.UNKNOWN_CAR.length() - 1;
-        // for(int i = 0; i < this.EMPTY_BOXES; i++)
-        // {
-        //     int index = randInt(0, l);
-        //     this.UNKNOWN_CAR.setCharAt(index, '_');
-        // }
-
         int l = this.UNKNOWN_CAR.length() - 1;
         Set<Integer> usedIndices = new HashSet<>();
         for(int i = 0; i < this.EMPTY_BOXES; i++)
@@ -101,10 +94,12 @@ public class GameWord extends GameString implements GameInterface
 
     public void restart()
     {
+        this.PHASE = 0;
         this.LIVES = 3;
         this.EMPTY_BOXES = 2;
         this.CAR_TO_GUESS = getCar();
-        this.PHASE = 0;
+        this.UNKNOWN_CAR = new StringBuilder(CAR_TO_GUESS);
+        hideCar();
     }
 
     public String nextStep(String parameter)
@@ -126,13 +121,13 @@ public class GameWord extends GameString implements GameInterface
                             UNKNOWN_CAR.setCharAt(i, s.charAt(0));
                         };
                     }
-                    // check
                     if(UNKNOWN_CAR.indexOf("_") == -1){ this.PHASE = 3;}
                 }
                 if(!CAR_TO_GUESS.contains(s))
                 {
                     this.PHASE = 1;
                     this.LIVES -= 1;
+                    if(this.LIVES <= 0){ this.PHASE = 4; }
                 }
             }
         }
